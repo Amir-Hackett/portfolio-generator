@@ -1,14 +1,25 @@
-const fs = require('fs');
-const generatePage = require('./src/page-template')
-//process is a global object that represents everything going on with this particular app
-//argv property of process is an array that holds exactly what was typed into the command line upon execution
-const profileDataArgs = process.argv.slice(2);
+const inquirer = require('inquirer')
+// lets us use the file system module
+// const fs = require('fs');
+// // imports from page-template js file
+// const generatePage = require('./src/page-template')
 
-const [name, github] = profileDataArgs;
+// const pageHTML = generatePage(name, github)
 
-fs.writeFile('./index.html', generatePage(name, github), err => {
-  if (err) throw new Error(err);
+// fs.writeFile('./index.html', pageHTML, err => {
+//   if (err) throw err;
 
-  console.log('Portfolio complete! Check out index.html to see the output!');
-});
+//   console.log('Portfolio complete! Check out index.html to see the output!');
+// });
 
+inquirer 
+// this is the key of the questions
+  .prompt([
+    {
+      type: 'input',
+      name: 'name',
+      message: 'What is your name?'
+    }
+  ])
+    // answer is the value of the key
+   .then(answers => console.log(answers))
