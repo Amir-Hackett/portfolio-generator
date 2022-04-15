@@ -1,26 +1,14 @@
+const fs = require('fs');
+const generatePage = require('./src/page-template')
 //process is a global object that represents everything going on with this particular app
 //argv property of process is an array that holds exactly what was typed into the command line upon execution
-const profileDataArgs = process.argv.slice(2, process.argv.length)
+const profileDataArgs = process.argv.slice(2);
+
 const [name, github] = profileDataArgs;
 
-//makes line break by placing on a new line
-const generatePage = (userName, githubName) => {
-    return `
-    <!DOCTYPE html> 
-    <html lang="en"> 
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Portfolio Demo</title>
-    </head>
-  
-    <body>
-      <h1>${name}</h1>
-      <h2><a href="https://github.com/${github}">Github</a></h2>
-    </body>
-    </html>
-    `
-}
-console.log(name, github);
-console.log(generatePage(name, github));
+fs.writeFile('./index.html', generatePage(name, github), err => {
+  if (err) throw new Error(err);
+
+  console.log('Portfolio complete! Check out index.html to see the output!');
+});
+
