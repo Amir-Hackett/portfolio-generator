@@ -1,3 +1,16 @@
+// create the about section
+const generateAbout = aboutText => {
+    if(!aboutText) {
+        return ''
+    }
+    return `
+    <section class="my-3" id="about">
+    <h2 class="text-dark bg-primary p-2 display-inline-block">About Me</h2>
+    <p>${aboutText}</p>
+    </section>
+    `
+}
+
 module.exports = templateData => {
 // destructure of projects and about me data from templateData based on their property key names
 // this will create three variables based on data in templateData
@@ -31,7 +44,7 @@ return `
     </div>
   </header>
   <main class="container my-5">
-
+    ${generateAbout(about)}    
   </main>
   <footer class="container text-center py-3">
     <h3 class="text-dark">&copy; ${new Date().getFullYear()} by ${header.name}</h3>
