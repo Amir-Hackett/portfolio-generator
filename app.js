@@ -43,7 +43,7 @@ const promptUser = () => {
     {
       type: 'input',
       name: 'about',
-      message: 'Provide some information about yourself',
+      message: 'Provide some information about yourself:',
       // when is like a validation but it passes an object 
       when: ({confirmAbout}) => {
         if(confirmAbout){
