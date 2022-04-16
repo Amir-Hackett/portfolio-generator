@@ -1,16 +1,8 @@
 const inquirer = require('inquirer')
-// lets us use the file system module
-// const fs = require('fs');
-// // imports from page-template js file
-// const generatePage = require('./src/page-template')
-
-// const pageHTML = generatePage(name, github)
-
-// fs.writeFile('./index.html', pageHTML, err => {
-//   if (err) throw err;
-
-//   console.log('Portfolio complete! Check out index.html to see the output!');
-// });
+//lets us use the file system module
+const fs = require('fs');
+// imports from page-template js file
+const generatePage = require('./src/page-template')
 
 //creates questions for the user
 const promptUser = () => {
@@ -144,5 +136,11 @@ if (!portfolioData.projects) {
 promptUser()
   .then(promptProject)
   .then(portfolioData => {
-    console.log(portfolioData);
+    const pageHTML = generatePage(portfolioData)
+
+    fs.writeFile('./index.html', pageHTML, err => {
+       if (err) throw new Error(err)
+
+    console.log('Page created! Check out index.html in this directory to see it!')
+    })
   });
